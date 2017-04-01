@@ -1,0 +1,36 @@
+<p *ngIf="_proposal.createdAt && !proposal_setting"><strong>OBS:</strong> {{_proposal.description}}</p>
+<hr />
+<p *ngIf="_proposal.price && !proposal_setting">A proposta enviada foi de R$ <a (click)="proposal_setting = true;" class="text-warning" style="text-decoration: underline;">{{_proposal.price}}</a>. <br />O status dessa proposta é: <span *ngIf="!_proposal.closed" class="text-info"> Aguardando resposta</span><span *ngIf="_proposal.closed" class="text-success"> finalizada</span></p> 
+<div>
+  <p *ngIf="!_proposal.createdAt && !proposal_setting">Esse contato não recebeu proposta ainda</p>
+  <form class="form" *ngIf="proposal_setting" autocomplete="off">
+    <div class="form-group">
+      <textarea name="_proposal.description" class="form-control" rows="3" placeholder="" [(ngModel)]="_proposal.description"
+        style="resize:none;"></textarea>
+      <label for="textarea1">Observações</label>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-usd fa-lg"></i></span>
+        <div class="input-group-content">
+          <input type="text" class="form-control" id="dollars9" [(ngModel)]="_proposal.price" name="_proposal.price">
+          <label for="dollars9">Reais</label>
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <span class="input-group-addon">
+															<div class="checkbox checkbox-styled checkbox-success">
+																<label>
+																	<input type="checkbox" [(ngModel)]="_proposal.closed" name="_proposal.closed">
+																	<span>Proposta aceita</span>
+      </label>
+    </div>
+    </span>
+</div>
+<button type="submit" class="btn btn-raised btn-primary ink-reaction" (click)="saveProposal()">Salvar</button>
+<button type="submit" class="btn btn-raised btn-default-light link-reaction" (click)="cancelPropose()">Cancelar</button>
+</form>
+</div>
+<button (click)="proposal_setting = true;" class="btn btn-flat btn-accent ink-reaction" *ngIf="!_proposal.createdAt && !proposal_setting">Cadastrar uma proposta</button>

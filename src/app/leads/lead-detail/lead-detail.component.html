@@ -1,0 +1,140 @@
+<section>
+		<div class="section-header" *ngIf="_lead.person">
+			<ol class="breadcrumb">
+				<li><a [routerLink]="['/']">Dashboard</a></li>
+				<li><a [routerLink]="['/leads']">Todos os contatos</a></li>
+				<li class="active">{{_lead.person.name}}</li>
+			</ol>
+		</div>
+		<div class="section-body">
+			<div class="card">
+
+				<!-- BEGIN CONTACT DETAILS HEADER -->
+				<div class="card-head style-primary">
+					<div class="tools pull-left">	
+					</div><!--end .tools -->
+					<div class="tools">
+						<a class="btn btn-flat hidden-xs" [routerLink]="['/leads']"><span class="glyphicon glyphicon-arrow-left"></span> &nbsp;Voltar para a listagem de contatos</a>
+					</div><!--end .tools -->
+				</div><!--end .card-head -->
+				<!-- END CONTACT DETAILS HEADER -->
+
+				<!-- BEGIN CONTACT DETAILS -->
+				<div class="card-tiles">
+					<div class="hbox-md col-md-12">
+						<div class="hbox-column col-md-9">
+							<div class="row">
+
+								<!-- BEGIN CONTACTS MAIN CONTENT -->
+								<div class="col-sm-7 col-md-8 col-lg-9">
+									<div class="margin-bottom-xxl" *ngIf="_lead.person">
+										<h1 class="text-light no-margin">{{_lead.person.name}}</h1>
+										<h5>
+											{{_lead.person.email}}, Data
+										</h5>
+										&nbsp;&nbsp;
+									</div><!--end .margin-bottom-xxl -->
+									<ul class="nav nav-tabs" data-toggle="tabs">
+										<li class="active"><a href="#message">Mensagem</a></li>
+										<li><a href="#proposal">Proposta</a></li>
+										<li><a href="#done">Finalizado</a></li>
+									</ul>
+									<div class="tab-content" *ngIf="_lead.data">
+
+										<!-- BEGIN CONTACTS NOTES -->
+										<div class="tab-pane active" id="message">
+											<br/>
+											<p>
+												{{_lead.data.mensagem}}
+											</p>
+											<hr *ngIf="_lead.status == 2" />
+											<div class="alert alert-success" role="alert" *ngIf="_lead.status == 2">
+												<span>Este contato se tournou um cliente! O valor gerado com este contato foi: <strong>R$ {{_proposal.price}}</strong></span>
+											</div>
+											
+										</div><!--end #notes -->
+
+										<div class="tab-pane" id="proposal">
+											<br/>
+											<app-proposal [lead_id]="_currentLeadId" (changeLeadStatus)="changeLeadStatusByProposal($event)" (haveProposal)="getProposal($event)"></app-proposal>
+										<br/>
+											
+										</div>
+
+										<div class="tab-pane" id="done" >
+										<br/>
+											<p *ngIf="_lead.status == 0">Você ainda não criou uma proposta. Antes de transformar este contato em uma venda, você precisa adicionar uma proposta!</p>
+											<form class="form" *ngIf="_lead.status != 0">
+												<div class="form-group">
+													<select id="select1" name="_lead.status" class="form-control" [(ngModel)]="_lead.status" (ngModelChange)="changeLeadStatus(_lead)" [disabled]="_lead.status == 2">
+														<option value="">&nbsp;</option>
+														<option value="2">Finalizado</option>
+														
+													</select>
+													<label for="select1">Status do contato</label>
+												</div>
+											</form>
+										</div>
+										<!-- END CONTACTS NOTES -->
+
+								</div><!--end .tab-content -->
+							</div><!--end .col -->
+							<!-- END CONTACTS MAIN CONTENT -->
+
+						</div><!--end .row -->
+					</div><!--end .hbox-column -->
+
+					<!-- BEGIN CONTACTS COMMON DETAILS -->
+					<div class="hbox-column col-md-3 style-default-light">
+						<div class="row" *ngIf="_lead.person">
+							<div class="col-xs-12">
+								<div *ngIf="_lead.person.data">
+								<h4>Informações</h4>
+								<br/>
+								
+								<dl class="dl-horizontal dl-icon" >
+									<dt *ngIf="_lead.person.data.fone"><span class="fa fa-fw fa-mobile fa-lg opacity-50"></span></dt>
+									<dd *ngIf="_lead.person.data.fone">
+										<span class="opacity-50">Telefone</span><br/>
+										<span class="text-medium">{{_lead.person.data.fone}}</span> &nbsp;<br/>
+									</dd>
+									<dt><span class="fa fa-fw fa-envelope-square fa-lg opacity-50"></span></dt>
+									<dd>
+										<span class="opacity-50">E-mail</span><br/>
+										<a class="text-medium" href="">{{_lead.person.email}}</a>
+									</dd>
+								</dl><!--end .dl-horizontal -->
+								</div>
+
+								<h4>Informações Analíticas</h4>
+								<br />
+								<dl class="dl-horizontal dl-icon" *ngIf="_lead.data.analytics">
+									<dt *ngIf="_lead.data.analytics.url"><span class="fa fa-fw fa-desktop fa-lg opacity-50"></span></dt>
+									<dd *ngIf="_lead.data.analytics.url">
+										<span class="opacity-50">Página de origem</span><br/>
+										<span class="text-medium"><a href="{{_lead.data.analytics.url}}">{{_lead.data.analytics.url}}<br />{{_lead.data.analytics.page_title}}</a></span> &nbsp;<br/>
+									</dd>
+
+									<dt><span class="fa fa-fw fa-archive fa-lg opacity-50"></span></dt>
+									<dd *ngIf="_lead.data.analytics.trafic_info">
+										<span class="opacity-50">Origem / Mídia</span><br/>
+										<span class="text-medium">{{_lead.data.analytics.trafic_info.source}} / {{_lead.data.analytics.trafic_info.medium}}</span> &nbsp;<br/>
+									</dd>
+
+									<dt><span class="fa fa-fw fa-shopping-cart fa-lg opacity-50"></span></dt>
+									<dd *ngIf="_lead.data.analytics.trafic_info.campaign">
+										<span class="opacity-50">Campanha</span><br/>
+										<span class="text-medium">{{_lead.data.analytics.trafic_info.campaign}}</span> &nbsp;<br/>
+									</dd>
+								</dl>
+							</div><!--end .col -->
+						</div><!--end .row -->
+					</div><!--end .hbox-column -->
+
+				</div><!--end .hbox-md -->
+			</div><!--end .card-tiles -->
+			<!-- END CONTACT DETAILS -->
+
+		</div><!--end .card -->
+	</div><!--end .section-body -->
+</section>

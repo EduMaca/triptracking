@@ -1,0 +1,43 @@
+<section class="has-actions style-default-bright">
+	<!-- BEGIN INBOX -->
+	<div class="section-body">
+	<h2 class="text-primary">Lista dos seus formulários</h2>
+		<div class="row">
+			<!-- BEGIN INBOX NAV -->
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<div class="row">
+					<!-- BEGIN INBOX EMAIL LIST -->
+					<div class="col-md-5 col-lg-4 height-6 scroll-sm">
+						<button type="submit" class="btn btn-raised btn-primary ink-reaction" (click)="newForm()">Criar novo Formulário</button>
+						<br /><br />
+						<div class="list-group list-email list-gray" *ngIf="_formList.length > 0">
+							
+							<a class="list-group-item" *ngFor="let form of _formList" [routerLink]="['/forms/', form.$key]" routerLinkActive="focus">
+								<div class="stick-top-left small-padding"><i class="fa fa-dot-circle-o" [class.text-info]="form.status == 1" [class.text-success]="form.status == 0"></i></div>
+								<h5>{{form.name}}</h5>
+								<p class="hidden-xs hidden-sm">Selecione para editar as configurações deste formulário</p>
+							</a>
+						</div><!--end .list-group -->
+					</div><!--end .col -->
+							<!-- END INBOX EMAIL LIST -->
+							<!-- BEGIN EMAIL CONTENT -->
+					<div class="col-md-7 col-lg-8">
+						<router-outlet></router-outlet>
+					</div><!--end .col -->
+				</div><!--end .row -->
+			</div><!--end .col -->
+		</div><!--end .row -->
+	</div><!--end .section-body -->
+									<!-- END INBOX -->
+									<!-- BEGIN SECTION ACTION -->
+	<div class="section-action style-primary">
+		<div class="section-action-row">
+		</div>
+		<div class="section-floating-action-row">
+			<button class="btn ink-reaction btn-floating-action btn-lg btn-accent" data-toggle="tooltip" data-placement="top" data-original-title="Novo Formulário" (click)="newForm()">
+				<i class="md md-add"></i>
+			</button>
+		</div>
+	</div><!--end .section-action -->
+		<!-- END SECTION ACTION -->
+</section>

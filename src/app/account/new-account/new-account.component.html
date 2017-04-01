@@ -1,0 +1,88 @@
+<section>
+  <div class="section-header ">
+    <ol class="breadcrumb">
+      <li class="active">Criar nova conta</li>
+    </ol>
+  </div>
+  <div class="section-body contain-lg">
+
+    <!-- BEGIN VERTICAL FORM -->
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="text-primary">Informações da conta</h1>
+      </div>
+      <!--end .col -->
+      <div class="col-lg-3 col-md-4">
+        <article class="margin-bottom-xxl">
+          <p class="lead">
+            Para poder usar o sistema, precisamos que você forneça algumas informações importantes para nós.
+          </p>
+          <p>
+            Lembre-se de que essas informações não serão disponibilizadas à ninguém.
+          </p>
+        </article>
+      </div>
+      <!--end .col -->
+      <div class="col-lg-offset-1 col-md-8">
+        <form class="form" autocomplete="off" #newAccountForm="ngForm" (ngSubmit)="submit()">
+          <div class="card">
+            <div class="card-head style-primary">
+              <header>Informações da conta</header>
+            </div>
+            <div class="card-body">
+              <div>
+                <label class="radio-inline radio-styled">
+													<input type="radio" name="_account.accountType" [(ngModel)]="_account.accountType" value="0" [checked]="_account.accountType == _accountTypes[0]"><span>Agência</span>
+												</label>
+                <label class="radio-inline radio-styled">
+													<input type="radio" name="_account.accountType" [(ngModel)]="_account.accountType" value="1" [checked]="_account.accountType == _accountTypes[1]"><span>Outro</span>
+												</label>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Firstname1" name="_account.business" [(ngModel)]="_account.business" minlength="7" required>
+                    <label for="Firstname1">Nome da empresa</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Lastname1" name="_account.phone" [(ngModel)]="_account.phone" minlength="8" required>
+                    <label for="Lastname1">Telefone</label>
+                  </div>
+                </div>
+              </div>
+
+             
+              <div class="form-group">
+                 <div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-globe fa-lg"></span></span>
+										<div class="input-group-content">
+											<input type="text" class="form-control" id="username9" name="_account.website" [(ngModel)]="_account.website" required>
+											<label for="username9">Website</label>
+										</div>
+									</div>
+              </div>
+              <div class="checkbox checkbox-styled">
+              </div>
+            </div>
+            <!--end .card-body -->
+            <div class="card-actionbar">
+              <div class="card-actionbar-row">
+                <button type="submit" class="btn btn-flat btn-primary ink-reaction" [disabled]="!newAccountForm.form.valid">Criar conta agora!</button>
+              </div>
+            </div>
+          </div>
+          <!--end .card -->
+          <em class="text-caption">Suas informações estão seguras</em>
+        </form>
+      </div>
+      <!--end .col -->
+    </div>
+    <!--end .row -->
+    <!-- END VERTICAL FORM -->
+
+   
+  </div>
+</section>

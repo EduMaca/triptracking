@@ -1,0 +1,103 @@
+<section class="style-default-bright">
+  <div class="section-body">
+    <h2 class="text-primary">Campos para formulários</h2>
+    <p>
+      Lista de todos os campos possíveis para usar em formulários
+    </p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nome</th>
+          <th>Tipo de dados</th>
+
+          <th class="text-right">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let field of _fields">
+          <td>
+            <div class="checkbox checkbox-styled checkbox-success">
+              <label>
+								<input type="checkbox">
+								<span></span>
+							</label>
+            </div>
+          </td>
+          <td>{{field.name}}</td>
+          <td>{{field.type}}</td>
+
+
+          <td class="text-right">
+            <button type="button" class="btn btn-icon-toggle" (click)="modal_delete_open(field)"><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <!--end .section-body -->
+
+  <div class="section-action style-primary">
+    <div class="section-action-row">
+    </div>
+    <div class="section-floating-action-row">
+      <button class="btn ink-reaction btn-floating-action btn-lg btn-accent" (click)="modal.open()">
+				<i class="md md-add"></i>
+			</button>
+    </div>
+  </div>
+  <!--end .section-action -->
+</section>
+
+<modal #myModal [keyboard]="false">
+  <form class="form-horizontal" role="form" autocomplete="off" #fieldForm="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">Criar novo campo</h4>
+    </modal-header>
+    <modal-body>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <label for="nome" class="control-label">Nome</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" name="_field.name" id="nome" class="form-control" placeholder="Nome do campo" [(ngModel)]="_field.name"
+            minlength="4" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <label for="tipo" class="control-label">Tipo</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" name="_field.type" id="tipo" class="form-control" placeholder="Tipo do campo" [(ngModel)]="_field.type"
+            minlength="4" required />
+        </div>
+      </div>
+    </modal-body>
+    <modal-footer>
+      <button type="submit" class="btn btn-raised btn-default ink-reaction" (click)="modal.close()">Cancelar</button>
+      <button type="submit" class="btn btn-raised btn-primary ink-reaction" (click)="createField()" [disabled]="!fieldForm.valid">Criar</button>
+    </modal-footer>
+  </form>
+</modal>
+
+
+<modal #modalDelte [keyboard]="false">
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Apagar dados</h4>
+  </modal-header>
+  <modal-body>
+    <div class="alert alert-danger alert-callout">
+      <p>Tem certeza que deseja apagar o campo {{_field.name}}?</p>
+      <strong>Id do campo:</strong> {{_field.$key}}
+    </div>
+    <div class="form-group">
+      <input type="text" name="key" id="nome" class="form-control" placeholder="Informe o id do campo" [(ngModel)]="key" />
+    </div>
+  </modal-body>
+  <modal-footer>
+    <button type="submit" class="btn btn-raised btn-default ink-reaction" (click)="modal_delete.close()">Cancelar</button>
+    <button type="submit" class="btn btn-raised btn-primary ink-reaction" (click)="deleteField(key)" [disabled]="key != _field.$key">Apagar</button>
+  </modal-footer>
+</modal>

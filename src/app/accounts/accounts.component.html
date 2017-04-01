@@ -1,0 +1,51 @@
+<section class="style-default-bright">
+	<div class="section-body">
+		<h2 class="text-primary">Todas as suas contas</h2>
+		<p>
+			Veja a lista de todas as contas dependentes da sua
+		</p>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Nome</th>
+					<th>Site</th>
+					<th>Data de criação</th>
+					<th class="text-right">Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let account of _accounts">
+					<td>
+						<div class="checkbox checkbox-styled checkbox-success">
+							<label>
+								<input type="checkbox" [(ngModel)]="account.status" name="account.status" (ngModelChange)="changeStatus(account)" >
+								<span></span>
+							</label>
+						</div>
+					</td>
+					<td><a  *ngIf="account.status" [routerLink]="['/']">{{account.business}}</a><span *ngIf="!account.status">{{account.business}}</span></td>
+					<td><a href="{{account.website}}" title="Vá para o site do {{account.business}}">{{account.website}}</a></td>
+					<td>{{account.createdAt}}</td>
+					
+					<td class="text-right">
+						<a [routerLink]="['/accounts/', account.$key]" class="btn btn-icon-toggle">
+							<i class="fa fa-pencil"></i>
+						</a>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div><!--end .section-body -->
+
+	<div class="section-action style-primary">
+		<div class="section-action-row">
+		</div>
+		<div class="section-floating-action-row">
+			<a class="btn ink-reaction btn-floating-action btn-lg btn-accent" data-toggle="tooltip" data-placement="top" data-original-title="Nova Conta" [routerLink]="['/accounts/new', _currentUser.accountId]">
+				<i class="md md-add"></i>
+			</a>
+		</div>
+	</div><!--end .section-action -->
+</section>

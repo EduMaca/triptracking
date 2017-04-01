@@ -1,0 +1,70 @@
+<section>
+  <div class="section-header">
+    <ol class="breadcrumb">
+      <li class="active">Seus contatos</li>
+    </ol>
+  </div>
+  <div class="section-body">
+    <div class="card">
+      <div class="card-head style-primary">
+        <div class="tools">
+          <a class="btn btn-floating-action btn-default-light" [routerLink]="['/leads/add']"><i class="fa fa-plus"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4 col-md-3 col-lg-2">
+            <ul class="nav nav-pills nav-stacked">
+              <li><small>CATEGORIAS</small></li>
+              <li class="active"><a [routerLink]="['/leads']">Todos os contatos <small class="pull-right text-bold opacity-75">{{_leads.length}}</small></a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm-8 col-md-9 col-lg-10">
+            <div class="margin-bottom-xxl">
+              <span class="text-light text-lg">Contatos filtrados <strong>{{_leads.length}}</strong></span>
+            </div>
+            <div class="list-results">
+              <div class="col-xs-12 col-md-6 col-lg-4 hbox-xs" *ngFor="let lead of _leads">
+                <div class="hbox-column width-2">
+                  <img class="img-circle img-responsive pull-left" src="../../../assets/img/avatar9.jpg?1404026744" alt="" />
+                </div>
+                <div class="hbox-column v-top" *ngIf="lead.person">
+                  <div class="clearfix">
+                    <div class="col-lg-12 margin-bottom-lg">
+                      <a class="text-lg text-medium" [routerLink]="['/leads/', lead.$key]">{{lead.person.name}}</a>
+                    </div>
+                  </div>
+                  <div class="clearfix opacity-75">
+                    <div class="col-md-12">
+                      <span class="glyphicon glyphicon-envelope text-sm"></span> &nbsp;{{lead.person.email}}
+                    </div>
+
+                    <div class="col-md-5" *ngIf="lead.person.data && lead.person.data.telefone">
+                      <span class="glyphicon glyphicon-phone text-sm" *ngIf="lead.person.data.telefone"></span> &nbsp;{{lead.person.data.telefone}}
+                    </div>
+                  </div>
+                  <div class="clearfix" *ngIf="lead.data.analytics">
+                    <div class="col-lg-12" *ngIf="lead.data.analytics.trafic_info">
+                      <span class="opacity-75"><span class="glyphicon glyphicon-globe text-sm"></span> &nbsp; {{lead.data.analytics.trafic_info.source}}</span>
+                    </div>
+                  </div>
+                  <div class="stick-top-right small-padding">
+                    <i class="fa fa-dot-circle-o fa-fw text-success" *ngIf="lead.status == 2"></i>
+                    <i class="fa fa-dot-circle-o fa-fw text-warning" *ngIf="lead.status == 0"></i>
+                    <i class="fa fa-dot-circle-o fa-fw text-info" *ngIf="lead.status == 1"></i>
+                  </div>
+                </div>
+                <!--end .hbox-column -->
+              </div>
+              <!--end .hbox-xs -->
+            </div>
+            <div class="text-center">
+              <app-pagination></app-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

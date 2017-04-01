@@ -1,0 +1,103 @@
+<section>
+  <div class="section-header ">
+    <ol class="breadcrumb">
+      <li class="active">Criação de Conta</li>
+    </ol>
+  </div>
+  <div class="section-body contain-lg">
+
+    <!-- BEGIN VERTICAL FORM -->
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="form-horizontal" (ngSubmit)="submit()" #newAccountForm="ngForm">
+          <div class="card">
+            <div class="card-head style-primary">
+              <header>Dados da conta</header>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Firstname5" class="col-sm-4 control-label">Nome da Empresa</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="Firstname5" [(ngModel)]="_account.business" name="_account.business" required="">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Lastname5" class="col-sm-4 control-label">Telefone</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="Lastname5" [(ngModel)]="_account.phone" name="_account.phone" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Lastname5" class="col-sm-4 control-label">Nome do usuário</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="Lastname5" [(ngModel)]="_user.full_name" name="_user.full_name" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Lastname5" class="col-sm-4 control-label">Site da conta</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="Lastname5" [(ngModel)]="_user.website" name="_user.website" required>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Lastname5" class="col-sm-4 control-label">E-mail para usuário</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="Lastname5" [(ngModel)]="_authData.email" name="_authData.email" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Lastname5" class="col-sm-4 control-label">Senha para usuário</label>
+                    <div class="col-sm-8">
+                      <input type="password" class="form-control" id="Lastname5" [(ngModel)]="_authData.password" name="_authData.password" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+
+            </div>
+            <!--end .card-body -->
+            <div class="card-actionbar">
+              <div class="card-actionbar-row">
+                <div class="checkbox checkbox-styled checkbox-success">
+                  <label>
+														<input type="checkbox" [(ngModel)]="_account.status" name="_account.status">
+														<span>Deseja que a conta fique ativa?</span>
+													</label>
+                </div>
+                <button type="submit" class="btn btn-flat btn-primary ink-reaction" [disabled]="!newAccountForm.form.valid">Salvar dados da nova conta</button>
+              </div>
+            </div>
+          </div>
+          <!--end .card -->
+        </form>
+      </div>
+      <!--end .col -->
+    </div>
+    <!--end .row -->
+    <!-- END HORIZONTAL FORM -->
+
+  </div>
+</section>

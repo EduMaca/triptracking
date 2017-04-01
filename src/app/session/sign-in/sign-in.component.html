@@ -1,0 +1,27 @@
+<form class="form floating-label" autocomplete="off" #signInForm="ngForm" (ngSubmit)="submit()">
+    <div class="form-group">
+        <input type="email" class="form-control" id="username" name="_authData.email" [(ngModel)]="_authData.email"  minlength="10" required>
+        <label for="username">E-mail</label>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" id="password" name="_authData.password" [(ngModel)]="_authData.password"  minlength="8" required>
+        <label for="password">Password</label>
+        <p class="help-block"><a [routerLink]="['/session/password-recover']">Perdeu a senha?</a></p>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-6 text-left">
+            <div class="checkbox checkbox-inline checkbox-styled">
+                <label>
+												<input type="checkbox"> <span>Remember me</span>
+											</label>
+            </div>
+        </div>
+        <!--end .col -->
+        <div class="col-xs-6 text-right">
+            <button class="btn btn-primary btn-raised" type="submit" [disabled]="!signInForm.form.valid">Entrar</button>
+        </div>
+        <!--end .col -->
+    </div>
+    <!--end .row -->
+</form>

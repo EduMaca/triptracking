@@ -1,3 +1,139 @@
-<h1>
-  {{title}}
-</h1>
+<header id="header" *ngIf="currentPath.indexOf('session') < 0">
+			<div class="headerbar">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="headerbar-left">
+					<ul class="header-nav header-nav-options">
+						<li class="header-nav-brand" >
+							<div class="brand-holder">
+								<a href="html/dashboards/dashboard.html">
+									<span class="text-lg text-bold text-primary">MATERIAL ADMIN</span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+								<i class="fa fa-bars"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="headerbar-right">
+					<ul class="header-nav header-nav-options">
+						<li>
+							<!-- Search form -->
+							<app-global-search [path]="currentPath"></app-global-search>
+						</li>
+						
+					</ul><!--end .header-nav-options -->
+					<ul class="header-nav header-nav-profile">
+						<li class="dropdown">
+							<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+								<img src="assets/img/avatar1.jpg?1403934956" alt="" />
+								<span class="profile-info">
+									{{currentUser.full_name}}
+									<small>{{currentUser.email}}</small>
+								</span>
+							</a>
+							<ul class="dropdown-menu animation-dock">
+								<li class="dropdown-header">Config</li>
+								<li><a href="html/pages/profile.html">My profile</a></li>
+								<li><a href="html/pages/blog/post.html">My blog <span class="badge style-danger pull-right">16</span></a></li>
+								<li><a href="html/pages/calendar.html">My appointments</a></li>
+								<li class="divider"></li>
+								<li><a (click)="logout()"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+							</ul><!--end .dropdown-menu -->
+						</li><!--end .dropdown -->
+					</ul><!--end .header-nav-profile -->
+				</div><!--end #header-navbar-collapse -->
+			</div>
+		</header>
+		<!-- END HEADER-->
+
+            
+
+
+		<!-- BEGIN BASE-->
+		<div id="base">
+
+
+			<!-- BEGIN CONTENT-->
+			<div id="content">
+
+			    <router-outlet></router-outlet>
+				<!-- BEGIN BLANK SECTION -->
+			</div><!--end #content-->
+			<!-- END CONTENT -->
+
+			<!-- BEGIN MENUBAR-->
+			<div id="menubar" class="menubar-inverse " *ngIf="currentPath.indexOf('session') < 0">
+				<div class="menubar-fixed-panel">
+					<div>
+						<a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+							<i class="fa fa-bars"></i>
+						</a>
+					</div>
+					<div class="expanded">
+						<a href="html/dashboards/dashboard.html">
+							<span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
+						</a>
+					</div>
+				</div>
+				<div class="menubar-scroll-panel">
+
+					<!-- BEGIN MAIN MENU -->
+					<ul id="main-menu" class="gui-controls">
+
+						<!-- BEGIN DASHBOARD -->
+						<li [class.active]="currentPath == '/'">
+							<a [routerLink]="['/']" [class.active]="currentPath == '/'">
+								<div class="gui-icon"><i class="md md-home"></i></div>
+								<span class="title">Dashboard</span>
+							</a>
+						</li><!--end /menu-li -->
+
+						<li [class.active]="currentPath.indexOf('account') > -1">
+							<a [routerLink]="['/accounts']" routerLinkActive="active">
+								<div class="gui-icon"><i class="md md-computer"></i></div>
+								<span class="title">Contas de Clientes</span>
+							</a>
+						</li><!--end /menu-li -->
+
+						<li [class.active]="currentPath.indexOf('form') > -1">
+							<a [routerLink]="['/forms']" routerLinkActive="active">
+								<div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+								<span class="title">Formulários</span>
+							</a>
+						</li><!--end /menu-li -->
+
+						<li [class.active]="currentPath.indexOf('lead') > -1">
+							<a [routerLink]="['/leads']" routerLinkActive="active">
+								<div class="gui-icon"><i class="md md-person"></i></div>
+								<span class="title">Contatos</span>
+							</a>
+						</li><!--end /menu-li -->
+
+						<li [class.active]="currentPath.indexOf('field') > -1">
+							<a [routerLink]="['/fields']" routerLinkActive="active">
+								<div class="gui-icon"><i class="fa fa-table"></i></div>
+								<span class="title">Campos de formulário</span>
+							</a>
+						</li><!--end /menu-li -->
+
+						
+						<!-- END DASHBOARD -->
+
+					</ul><!--end .main-menu -->
+					<!-- END MAIN MENU -->
+
+					<div class="menubar-foot-panel">
+						<small class="no-linebreak hidden-folded">
+							<span class="opacity-75">Copyright &copy; 2014</span> <strong>CodeCovers</strong>
+						</small>
+					</div>
+				</div><!--end .menubar-scroll-panel-->
+			</div><!--end #menubar-->
+			<!-- END MENUBAR -->
+
+		</div><!--end #base-->
+		<ng2-toasty></ng2-toasty>

@@ -1,0 +1,154 @@
+<section>
+  <div class="section-header">
+    <ol class="breadcrumb">
+      <li><a [routerLink]="['/leads']">Todos os contatos</a></li>
+      <li class="active">Novo Contato</li>
+    </ol>
+  </div>
+  <div class="section-body contain-lg">
+    <div class="row">
+
+      <!-- BEGIN ADD CONTACTS FORM -->
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-head style-primary">
+            <header>Adicione um contato manualmente</header>
+          </div>
+          <form class="form" role="form" #addLeadForm="ngForm" (ngSubmit)="submit()">
+
+            <!-- BEGIN DEFAULT FORM ITEMS -->
+            <div class="card-body style-primary form-inverse">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group floating-label">
+                        <input type="text" class="form-control input-lg" id="firstname" name="_person_info.name" [(ngModel)]="_person_info.name"
+                          minlength="6" required>
+                        <label for="firstname">Nome</label>
+                      </div>
+                    </div>
+                    <!--end .col -->
+                    <div class="col-md-6">
+                      <div class="form-group floating-label">
+                        <input type="email" class="form-control input-lg" id="lastname" name="_person_info.email" [(ngModel)]="_person_info.email"
+                          minlength="10" required>
+                        <label for="lastname">E-mail</label>
+                      </div>
+                    </div>
+                    <!--end .col -->
+                  </div>
+                  <!--end .row -->
+                </div>
+                <!--end .col -->
+              </div>
+              <!--end .row -->
+            </div>
+            <!--end .card-body -->
+            <!-- END DEFAULT FORM ITEMS -->
+
+            <!-- BEGIN FORM TABS -->
+            <div class="card-head style-primary">
+              <ul class="nav nav-tabs tabs-text-contrast tabs-accent" data-toggle="tabs">
+                <li class="active"><a href="#contact">INFORMAÇÕES DO CONTATO</a></li>
+                <li><a href="#skills">INFORMAÇÕES ADICIONAIS</a></li>
+              </ul>
+            </div>
+            <!--end .card-head -->
+            <!-- END FORM TABS -->
+
+            <!-- BEGIN FORM TAB PANES -->
+            <div class="card-body tab-content">
+              <div class="tab-pane active" id="contact">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="mobile" name="_source" [(ngModel)]="_source" minlength="4" required>
+                          <label for="mobile">Origem</label>
+                        </div>
+                      </div>
+                      <!--end .col -->
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="phone" name="_medium" [(ngModel)]="_medium" minlength="3" required>
+                          <label for="phone">Mídia</label>
+                        </div>
+                      </div>
+                      <!--end .col -->
+                    </div>
+                    <!--end .row -->
+                    <!--end .form-group -->
+                  </div>
+                </div>
+                <!--end .row -->
+              </div>
+              <!--end .tab-pane -->
+              <div class="tab-pane " id="skills">
+                <ul class="list-unstyled" id="skillsList">
+                  <li class="clearfix" style="display: list-item;" *ngFor="let info of _another_info">
+                    <div class="row">
+                      <div class="col-xs-5">
+                        <div class="form-group"> <input type="text" class="form-control" id="skill-1" name="info.name" [(ngModel)]="info.name" required>
+                          <label for="skill-1">Nome da informação</label>
+                        </div>
+                      </div>
+                      <div class="col-xs-5">
+                        <div class="form-group">
+                          <input type="info.type" name="info.value" class="form-control" [(ngModel)]="info.value" required/>
+                          <label for="skill-rating-1">Dado que você quer guardar</label>
+                        </div>
+                      </div>
+                      <div class="col-xs-2"><a (click)="removeField(info.$key)"><i class="fa fa-times"></i></a></div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="form-group">
+                  <popover-content #myPopover title="Informe o tipo de dado" placement="top" [animation]="true" [closeOnClickOutside]="true">
+                    <div class="radio radio-styled">
+                      <label>
+												<input type="radio" name="_another_info_type" value="number" [(ngModel)]="_another_info_type">
+												<span>Número</span>
+											</label>
+                    </div>
+
+                    <div class="radio radio-styled">
+                      <label>
+												<input type="radio" name="_another_info_type" value="text" [(ngModel)]="_another_info_type">
+												<span>Texto</span>
+											</label>
+                    </div>
+
+                    <a class="btn btn-raised btn-primary" (click)="addInfoFields(_another_info_type)">Criar Informação</a>
+                  </popover-content>
+                  <a class="btn btn-raised btn-default-bright" [popover]="myPopover">ADICIONE NOVA INFORMAÇÃO</a>
+                </div>
+                <!--end .form-group -->
+              </div>
+              <!--end .tab-pane -->
+            </div>
+
+            <!-- BEGIN FORM FOOTER -->
+            <div class="card-actionbar">
+              <div class="card-actionbar-row">
+                <a class="btn btn-flat" [routerLink]="['/leads']">CANCELAR</a>
+                <button type="submit" class="btn btn-flat btn-accent" [disabled]="!addLeadForm.form.valid">ADICIONAR ESTE CONTATO</button>
+              </div>
+              <!--end .card-actionbar-row -->
+            </div>
+            <!--end .card-actionbar -->
+            <!-- END FORM FOOTER -->
+
+          </form>
+        </div>
+        <!--end .card -->
+      </div>
+      <!--end .col -->
+      <!-- END ADD CONTACTS FORM -->
+
+    </div>
+    <!--end .row -->
+  </div>
+  <!--end .section-body -->
+</section>

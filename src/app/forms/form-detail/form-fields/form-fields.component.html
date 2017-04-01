@@ -1,0 +1,46 @@
+<div class="card">
+<div class="card-head">
+  <ul class="nav nav-tabs nav-justified" data-toggle="tabs">
+    <li class="active"><a href="#first4">Campos do formulário</a></li>
+    <li><a href="#second4">Implementar o fomulário</a></li>
+    <li><a href="#third4">Últimos contatos</a></li>
+  </ul>
+</div>
+
+<!--end .card-head -->
+<div class="card-body tab-content">
+
+  <div class="tab-pane active" id="first4">
+    <p>Selecione as informações que você quer colher no seu formulário</p>
+    <div class="row">
+      <div class="col-md-3" *ngFor="let field of _allFields">
+        <div class="checkbox checkbox-styled">
+          <label>
+								<input type="checkbox" name="chose" [(ngModel)]="field.checked" (ngModelChange)="onChange(field)">
+								<span>{{field.name | uppercase}}</span>
+							</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="tab-pane" id="second4">
+    <div *ngIf="_allFormFields.length != 0">
+      <p>
+        O Formulário da sua página deve parecer com este:
+      </p>
+      <code><![CDATA[<form data-triptracking-id="{{formId}}" data-triptracking-cls="triptracking">]]></code><br />
+      <code *ngFor="let field of _allFormFields"><![CDATA[<input type="{{field.type}}" name="{{field.name}}" />]]><br /></code>
+      <code><![CDATA[</form>]]></code>
+      <hr />
+      <p>Cole este código entre a tag <code>&lt;head&gt;</code>:</p>
+      <code><![CDATA[<script>(function(a,b,c,d,e,f,g){f=b.createElement(c),g=document.getElementsByTagName(c)[0],f.type="text/javascript",f.async=!1,f.src=d,g.parentNode.insertBefore(f,g),f.onload=function(){e=a["triptracking"],e.setup("{{accountId}}","{{formId}}")}})(window,document,"script","//tracking.tripdigital.com.br/assets/triptracking.min.js","triptracking");</script>]]></code>
+    </div>
+    <p *ngIf="_allFormFields.length < 1">Você ainda não selecionou nenhum campo para este formulário.<strong> Para implementá-lo, selecione algum campo!</strong></p>
+  </div>
+  <div class="tab-pane" id="third4">
+    <p>Veja os últimos contatos que você recebeu com este formulário </p>
+
+  </div>
+</div>
+</div>

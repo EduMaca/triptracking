@@ -1,0 +1,39 @@
+<h1 class="no-margin" *ngIf="!form_editing" (dblclick)="eventEmitDoubleClick($event)">{{_form.name}}</h1>
+<form class="form-inline" *ngIf="form_editing" autocomplete="off">
+	<div class="form-group">
+		<input type="text" [(ngModel)]="_form.name" name="_form.name" class="form-control" />
+	</div>
+	<button type="submit" class="btn btn-raised btn-primary ink-reaction" (click)="saveForm()">Salvar</button>
+	<button type="submit" class="btn btn-raised btn-default-light ink-reaction" (click)="form_editing = false;">Cancelar</button>
+</form>
+<div class="btn-group stick-top-right">
+	<button class="btn btn-icon-toggle btn-default" (click)="modal.open()"><i class="md md-delete"></i></button>
+</div>
+<span class="pull-right text-default-light">Hoje, 08:12 am</span>
+<hr/>
+<div class="col-md-12">
+	<app-form-fields [formId]="_currentId" [accountId]="_currentAccountId"></app-form-fields>
+
+	<button type="submit" class="btn btn-raised btn-danger ink-reaction" (click)="deactivateForm()" *ngIf="_form.status == 0">Desativar Formulário</button>
+	<button type="submit" class="btn btn-raised btn-primary ink-reaction" (click)="activateForm()" *ngIf="_form.status == 1">Ativar Formulário</button>
+</div>
+<!--end .col -->
+
+<modal #myModal [keyboard]="false">
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">Tem certeza que deseja apagar o formulário {{_form.name}}?</h4>
+	</modal-header>
+	<modal-body>
+		<div class="alert alert-danger alert-callout">
+			<p>Se você apagar este formulário, o TripTracking não conseguirá mais receber os dados do seu formulário no site!</p>
+			<strong>Id do formulário:</strong> {{_currentId}}
+		</div>
+		<div class="form-group">
+			<input type="text" [(ngModel)]="key" name="key" class="form-control" placeholder="Confirme o id do formulário" />
+		</div>
+	</modal-body>
+	<modal-footer>
+		<button type="submit" class="btn btn-raised btn-default ink-reaction" (click)="modal.close()">Cancelar</button>
+		<button type="submit" class="btn btn-raised btn-primary ink-reaction" [disabled]="key != _currentId" (click)="deleteForm()">Apagar</button>
+	</modal-footer>
+</modal>
